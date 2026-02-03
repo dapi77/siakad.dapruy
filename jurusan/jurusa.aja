@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Jurusan - X PPLG 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-color: #f8f9fc; }
+        .sidebar { background-color: #4e73df; min-height: 100vh; color: white; transition: all 0.3s; }
+        .sidebar .nav-link { color: rgba(255,255,255,.8); border-bottom: 1px solid rgba(255,255,255,.05); padding: 15px; }
+        .sidebar .nav-link:hover { color: white; background: rgba(255,255,255,.1); }
+        .sidebar .active { color: white !important; font-weight: bold; background: rgba(0,0,0,.1); }
+        .card { border: none; border-radius: 10px; }
+        .card-header { background-color: #ffffff; border-bottom: 1px solid #e3e6f0; }
+        .btn-primary { background-color: #4e73df; border: none; border-radius: 5px; }
+        .badge-info { background-color: #36b9cc; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar shadow">
+            <div class="sidebar-sticky pt-3">
+                <div class="text-center mb-4">
+                    <div class="btn btn-light rounded-circle mb-2"><i class="fas fa-laugh-wink text-primary"></i></div>
+                    <h5 class="text-white">X PPLG <sup>1</sup></h5>
+                </div>
+                <hr class="sidebar-divider border-white opacity-25">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="../index.php"><i class="fas fa-fw fa-tachometer-alt mr-2"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../kelas/kelas.php"><i class="fas fa-fw fa-graduation-cap mr-2"></i> Data Kelas</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="jurusan.php"><i class="fas fa-fw fa-list mr-2"></i> Data Jurusan</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-10 ml-sm-auto px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h3 mb-0 text-gray-800">Manajemen Jurusan</h1>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb bg-transparent mb-0">
+                    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                    <li class="breadcrumb-item active text-primary" aria-current="page">Jurusan</li>
+                  </ol>
+                </nav>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Kompetensi Keahlian</h6>
+                    <button class="btn btn-sm btn-primary shadow-sm" onclick="showModal()"><i class="fas fa-plus-circle fa-sm mr-1"></i> Tambah Jurusan</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th width="5%">No</th>
+                                    <th width="15%">Kode</th>
+                                    <th>Nama Jurusan</th>
+                                    <th>Kepala Jurusan</th>
+                                    <th width="15%" class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBodyJurusan">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-5 pb-3">
+                <div class="text-center text-muted small">
+                    Copyright &copy; X PPLG 1 2026 • Build with <i class="fas fa-heart text-danger"></i>
+                </div>
+            </footer>
+        </main>
+    </div>
+</div>
+
+<div class="modal fade" id="jurusanModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Tambah Jurusan</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editIndex">
+                <div class="form-group">
+                    <label>Kode Jurusan</label>
+                    <input type="text" id="kodeJurusan" class="form-control" placeholder="Contoh: PPLG">
+                </div>
+                <div class="form-group">
+                    <label>Nama Jurusan</label>
+                    <input type="text" id="namaJurusan" class="form-control" placeholder="Nama Lengkap Jurusan">
+                </div>
+                <div class="form-group">
+                    <label>Kepala Jurusan</label>
+                    <input type="text" id="kajur" class="form-control" placeholder="Nama Kepala Jurusan">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="saveData()">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Data Dummy Awal
+    let dataJurusan = [
+        { kode: "PPLG", nama: "Pengembangan Perangkat Lunak dan Gim", kajur: "Bpk. Iwan Setiawan, M.Kom" },
+        { kode: "DKV", nama: "Desain Komunikasi Visual", kajur: "Ibu Maya Sartika, S.Sn" }
+    ];
+
+    function renderTable() {
+        const tbody = document.getElementById('tableBodyJurusan');
+        tbody.innerHTML = '';
+        dataJurusan.forEach((item, index) => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><span class="badge badge-info text-white p-2">${item.kode}</span></td>
+                    <td>${item.nama}</td>
+                    <td>${item.kajur}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-outline-warning btn-sm border-0" onclick="editData(${index})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-outline-danger btn-sm border-0" onclick="deleteData(${index})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function showModal() {
+        document.getElementById('modalTitle').innerText = "Tambah Jurusan";
+        document.getElementById('editIndex').value = "-1";
+        document.getElementById('kodeJurusan').value = "";
+        document.getElementById('namaJurusan').value = "";
+        document.getElementById('kajur').value = "";
+        $('#jurusanModal').modal('show');
+    }
+
+    function saveData() {
+        const index = document.getElementById('editIndex').value;
+        const kode = document.getElementById('kodeJurusan').value;
+        const nama = document.getElementById('namaJurusan').value;
+        const kajur = document.getElementById('kajur').value;
+
+        if(!kode || !nama || !kajur) return alert("Mohon isi semua data!");
+
+        if (index === "-1") {
+            dataJurusan.push({ kode, nama, kajur });
+        } else {
+            dataJurusan[index] = { kode, nama, kajur };
+        }
+
+        $('#jurusanModal').modal('hide');
+        renderTable();
+    }
+
+    function editData(index) {
+        document.getElementById('modalTitle').innerText = "Edit Jurusan";
+        document.getElementById('editIndex').value = index;
+        document.getElementById('kodeJurusan').value = dataJurusan[index].kode;
+        document.getElementById('namaJurusan').value = dataJurusan[index].nama;
+        document.getElementById('kajur').value = dataJurusan[index].kajur;
+        $('#jurusanModal').modal('show');
+    }
+
+    function deleteData(index) {
+        if (confirm("Hapus jurusan ini?")) {
+            dataJurusan.splice(index, 1);
+            renderTable();
+        }
+    }
+
+    // Jalankan saat pertama kali buka
+    renderTable();
+</script>
+
+</body>
+</html>
