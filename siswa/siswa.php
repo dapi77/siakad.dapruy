@@ -186,18 +186,26 @@
                                             <th>aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <?php
+                                    include '../db.php';
+                                    $i = 1;
+                                    $data = mysqli_query($koneksi, "SELECT * FROM siswa");
+                                    while($d = mysqli_fetch_array($data)){
+                                        ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>dapruy</td>
-                                            <td>3232324</td>
-                                            <td>dapruy@gmail.com</td>
-                                            <td>cowo</td>
+                                            <td><?php echo $i++ ?></td>
+                                            <td><?php echo $d['nama']; ?></td>
+                                            <td><?php echo $d['nisn']; ?></td>
+                                            <td><?php echo $d['email']; ?></td>
+                                            <td><?php echo $d['jk']; ?></td>
                                             <td>
                                                 <a href="editsiswa.php" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
                                                 <button href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
+                                        <?php
+                                    }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
