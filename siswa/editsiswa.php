@@ -162,50 +162,21 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">halaman siswa</h1>
-                    <br>
-                <!-- /.container-fluid -->
-
-            <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <a href="tambahsiswa.php" class="btn btn-primary">Tambah Data</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Siswa</th>
-                                            <th>NISN</th>
-                                            <th>EMAIL</th>
-                                            <th>Jenis kelamin</th>
-                                            <th>aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>dapruy</td>
-                                            <td>3232324</td>
-                                            <td>dapruy@gmail.com</td>
-                                            <td>cowo</td>
-                                            <td>
-                                                <a href="editsiswa.php" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
-                                                <button href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <h1 class="h3 mb-4 text-gray-800">Tambah Data Siswa SMKN 1 Ciomas</h1>
                     </div>
-
-                </div>
-            <!-- End of Main Content -->
+               <form action="">
+                   <label for="nama" class="form-label">Nama Siswa</label>
+                   <input type="nama" class="form-control">
+                   <label for="NISN" class="form-label">NISN</label>
+                   <input type="NISN" class="form-control">
+                   <label for="email" class="form-label">Email</label>
+                   <input type="email" class="form-control">
+                   <label for="kelamin" class="form-label">Jenis Kelamin</label>
+                   <input type="kelamin" class="form-control">
+                   <br>
+                   <a href="siswa.php" class="btn btn-primary">simpan data</a>
+                </form>  
+  
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
